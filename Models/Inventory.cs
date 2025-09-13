@@ -28,7 +28,8 @@ namespace InventorySystem.Models
 
         public Product SearchProduct(string name)
         {
-            return products.Find(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            return products.Find(p => 
+                p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool DeleteProduct(string name)
@@ -39,6 +40,7 @@ namespace InventorySystem.Models
                 products.Remove(product);
                 return true;
             }
+
             return false;
         }
 
@@ -52,6 +54,7 @@ namespace InventorySystem.Models
                 product.Quantity = newQuantity;
                 return true;
             }
+
             return false;
         }
     }
