@@ -14,10 +14,11 @@ namespace InventorySystem.Models
 
         public void ViewAllProducts()
         {
-            if (products.Count == 0)
+            if (!products.Any())
             {
                 Console.WriteLine("Inventory is empty.");
                 return;
+
             }
 
             foreach (var product in products)
