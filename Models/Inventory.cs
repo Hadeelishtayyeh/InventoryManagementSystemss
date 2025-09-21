@@ -28,34 +28,35 @@ namespace InventorySystem.Models
 
         public Product SearchProduct(string name)
         {
-            return products.Find(p => 
+            return products.Find(p =>
                 p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool DeleteProduct(string name)
         {
             var product = SearchProduct(name);
-            if (product != null)
+
+            if (product == null)
             {
-                products.Remove(product);
-                return true;
+                throw new ArgumentException($"Product with name '{name}' does not exist.");
             }
 
-            return false;
+            products.Remove(product);
+            return true;
         }
 
-        public bool EditProduct(string name, string newName, decimal newPrice, int newQuantity)
+        public void EditProduct(string name, string newName, decimal newPrice, int newQuantity)
         {
             var product = SearchProduct(name);
-            if (product != null)
+
+            if (product == null)
             {
-                product.Name = newName;
-                product.Price = newPrice;
-                product.Quantity = newQuantity;
-                return true;
+                throw new ArgumentException($"Product with name '{name}' does not exist.");
             }
 
-            return false;
+            product.Name = newName;
+            product.Price = newPrice;
+            product.Quantity = newQuantity;
         }
     }
 }
